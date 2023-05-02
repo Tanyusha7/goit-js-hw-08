@@ -1,10 +1,11 @@
-import 'simplelightbox/dist/simple-lightbox.esm';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // Add imports above this line
 import { galleryItems } from './gallery-items';
 // Change code below this line
 
 const galleryPictures = document.querySelector('.gallery');
+galleryPictures.style.listStyle = 'none';
 
 const newGallery = createPicturesMarkup(galleryItems);
 
