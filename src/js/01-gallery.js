@@ -1,3 +1,5 @@
+import simpleLightbox from 'simplelightbox';
+console.log(simpleLightbox);
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // Add imports above this line
@@ -15,6 +17,8 @@ galleryPictures.addEventListener('click', onGalleryPictures);
 
 console.log(galleryPictures);
 
+let lightbox;
+
 function createPicturesMarkup(picture) {
   return picture
     .map(({ preview, original, description }) => {
@@ -31,7 +35,7 @@ function createPicturesMarkup(picture) {
 function onGalleryPictures(evt) {
   evt.preventDefault();
 
-  let lightbox = $('.gallery__link').simpleLightbox({
+  lightbox = $('.gallery__link').simpleLightbox({
     captionsData: 'alt',
     captionDelay: '250',
   });
