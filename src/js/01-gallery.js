@@ -1,11 +1,12 @@
-import simpleLightbox from 'simplelightbox';
-console.log(simpleLightbox);
+import SimpleLightbox from 'simplelightbox';
+console.log(SimpleLightbox);
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // Add imports above this line
 import { galleryItems } from './gallery-items';
-// Change code below this line
 
+// Change code below this line
+console.log(galleryItems);
 const galleryPictures = document.querySelector('.gallery');
 galleryPictures.style.listStyle = 'none';
 
@@ -32,15 +33,18 @@ function createPicturesMarkup(picture) {
     })
     .join(' ');
 }
+
+const lightboxEl = document.querySelector('.gallery__link');
+console.log(lightboxEl);
 function onGalleryPictures(evt) {
   evt.preventDefault();
-
-  lightbox = $('.gallery__link').simpleLightbox({
+  if (evt.target.nodeName !== 'IMG') {
+    return;
+  }
+  lightbox = $('.gallery ').simpleLightbox({
     captionsData: 'alt',
     captionDelay: '250',
   });
 
   console.log(lightbox);
 }
-
-console.log(galleryItems);
