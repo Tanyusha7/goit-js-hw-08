@@ -10,6 +10,7 @@ form.addEventListener('input', throttle(onInput, 500));
 submitForm.addEventListener('click', onSubmitForm);
 
 function onInput(e) {
+  e.preventDefault();
   formData[e.target.name] = e.target.value;
 
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
