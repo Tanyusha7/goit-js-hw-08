@@ -14,12 +14,6 @@ const newGallery = createPicturesMarkup(galleryItems);
 
 galleryPictures.insertAdjacentHTML('beforeend', newGallery);
 
-galleryPictures.addEventListener('click', onGalleryPictures);
-
-// console.log(galleryPictures);
-
-let lightbox;
-
 function createPicturesMarkup(picture) {
   return picture
     .map(({ preview, original, description }) => {
@@ -34,14 +28,9 @@ function createPicturesMarkup(picture) {
     .join(' ');
 }
 
-function onGalleryPictures(evt) {
-  evt.preventDefault();
-  if (evt.target.nodeName !== 'IMG') {
-    return;
-  }
-  lightbox = new SimpleLightbox('.gallery__link', {
-    captionsData: 'alt',
-    captionDelay: '250',
-  });
-}
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: '250',
+});
+
 console.log(galleryItems);
