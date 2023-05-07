@@ -10,24 +10,28 @@ form.addEventListener('input', throttle(onInput, 500));
 submitForm.addEventListener('click', onSubmitForm);
 
 function onInput(e) {
-  e.preventDefault();
-  formData[e.target.name] = e.target.value;
+  if (!e.currentTarget) {
+    return;
+  }
+
+  const {
+    elements: { email, message },
+  } = e.currentTarget;
+
+  formData = { email: email.value, message: message.value };
 
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
-  const dataArray = localStorage.getItem('feedback-form-state');
-
-  savedData = JSON.parse(dataArray);
 }
 
 textarea();
 function textarea() {
-  const savedText = localStorage.getItem('feedback-form-state');
-  const savedTextData = JSON.parse(savedText);
-
-  if (savedTextData) {
-    form.email.value = savedTextData.email;
-    form.message.value = savedTextData.message;
+  const savedTextData = JSON.parse(localStorage.getItem('feedback-form-state'));
+  if (!savedTextData) {
+    return;
   }
+
+  form.email.value = savedTextData.email;
+  form.message.value = savedTextData.message;
 }
 
 function onSubmitForm(e) {
@@ -36,7 +40,9 @@ function onSubmitForm(e) {
     return alert('the field must to be filled');
   }
 
-  localStorage.getItem('feedback-form-state');
+  const dataArray = localStorage.getItem('feedback-form-state');
+  savedData = JSON.parse(dataArray);
+
   localStorage.removeItem('feedback-form-state');
   form.email.value = '';
   form.message.value = '';
